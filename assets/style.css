@@ -138,7 +138,25 @@ em { font-style: italic; }
 
 /* ---------- textos ---------- */
 .textos { border-top: 1px solid var(--linha); }
-.lista-textos { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 24px; margin-top: 52px; }
+.textos .secao-cabeca { position: relative; }
+.lista-textos {
+  display: flex; gap: 24px; margin-top: 28px;
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  padding: 6px 0 22px; scrollbar-width: thin; scrollbar-color: var(--linha) transparent;
+}
+.lista-textos::-webkit-scrollbar { height: 6px; }
+.lista-textos::-webkit-scrollbar-thumb { background: var(--linha); border-radius: 3px; }
+.lista-textos > .texto-card { flex: 0 0 calc((100% - 48px) / 3); scroll-snap-align: start; }
+.lista-textos > .carregando { flex: 1; }
+.carrossel-setas { display: flex; justify-content: flex-end; gap: 10px; margin-top: 30px; }
+.seta {
+  width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid var(--linha); background: var(--papel); color: var(--tinta);
+  font-size: 19px; cursor: pointer; transition: border-color .2s, color .2s, opacity .2s;
+}
+.seta:hover:not(:disabled) { border-color: var(--terracota); color: var(--terracota); }
+.seta:disabled { opacity: .35; cursor: default; }
 .texto-card {
   display: flex; flex-direction: column;
   background: var(--papel); border: 1px solid var(--linha); border-radius: 6px;
@@ -189,6 +207,7 @@ em { font-style: italic; }
 
 /* ---------- responsivo ---------- */
 @media (max-width: 900px) {
+  .lista-textos > .texto-card { flex-basis: calc((100% - 24px) / 2); }
   .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 40px; padding-bottom: 72px; }
   .hero-arte { max-width: 420px; width: 100%; margin: 0 auto; }
   .sobre { grid-template-columns: 1fr; gap: 28px; }
@@ -213,7 +232,8 @@ em { font-style: italic; }
   .hero-acoes .btn { width: 100%; }
   .citacao { padding: 64px 20px; }
   .contato-caixa { padding: 56px 20px; }
-  .lista-textos { grid-template-columns: 1fr; }
+  .lista-textos > .texto-card { flex-basis: 84%; }
+  .carrossel-setas { display: none; }
   .whats-flutuante { right: 16px; bottom: 16px; width: 54px; height: 54px; }
 }
 

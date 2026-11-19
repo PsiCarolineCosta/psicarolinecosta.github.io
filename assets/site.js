@@ -52,7 +52,26 @@
         '<span class="texto-ler">Ler no Medium <span aria-hidden="true">↗</span></span>' +
         '</a>';
     }).join('');
+    lista.scrollLeft = 0;
+    atualizarSetas();
   }
+
+  /* setas do carrossel */
+  var ant = document.getElementById('seta-ant');
+  var prox = document.getElementById('seta-prox');
+  function passo() {
+    var c = lista.querySelector('.texto-card');
+    return c ? c.getBoundingClientRect().width + 24 : lista.clientWidth;
+  }
+  function atualizarSetas() {
+    var max = lista.scrollWidth - lista.clientWidth - 4;
+    ant.disabled = lista.scrollLeft <= 4;
+    prox.disabled = lista.scrollLeft >= max;
+  }
+  ant.addEventListener('click', function () { lista.scrollBy({ left: -passo(), behavior: 'smooth' }); });
+  prox.addEventListener('click', function () { lista.scrollBy({ left: passo(), behavior: 'smooth' }); });
+  lista.addEventListener('scroll', atualizarSetas, { passive: true });
+  window.addEventListener('resize', atualizarSetas);
 
   var cache = null;
   try { cache = JSON.parse(sessionStorage.getItem('medium-textos') || 'null'); } catch (e) {}
