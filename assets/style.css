@@ -205,3 +205,16 @@ em { font-style: italic; }
   .lista-textos { grid-template-columns: 1fr; }
   .whats-flutuante { right: 16px; bottom: 16px; width: 54px; height: 54px; }
 }
+
+/* ---------- obra no topo + foto no Sobre ---------- */
+.foto.obra { object-position: 50% 22%; filter: saturate(.92); }
+.sobre-foto {
+  display: block; width: 100%; max-width: 380px; height: auto;
+  aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 35%;
+  margin-top: 36px; border-radius: 6px;
+  box-shadow: 0 30px 60px -32px rgba(80, 45, 25, .4);
+}
+.sobre .secao-cabeca { align-self: start; }
+@media (max-width: 900px) {
+  .sobre-foto { max-width: 340px; margin-top: 28px; }
+}
